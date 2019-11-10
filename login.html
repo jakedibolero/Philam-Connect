@@ -1,0 +1,27 @@
+<html>
+<input type="text" id="username" placeholder="Enter username">
+<input type="text" id="password" placeholder="Enter Password">
+<button onclick="login()">Login</button>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	function login(){
+		var username = $("#username").val();
+		var password = $("#password").val();
+
+		console.log(username);
+		$.ajax({
+			url:"http://localhost:8080/login",
+			type:"POST",
+			data:{
+				username:username,
+				password:password
+			},
+			success: function(data){
+				if(data == "1"){
+					
+				}
+			}
+		});
+	}
+</script>

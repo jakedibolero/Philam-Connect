@@ -1,0 +1,64 @@
+<html>
+<input type = "text" placeholder = "Input Name" id= "name" required>
+<input type = "text" placeholder = "Input Email" id= "email" required>
+<input type = "text" placeholder = "Input Birthdate" id= "birthdate" required>
+<input type = "text" placeholder = "Input Contact Number" id= "contactnumber" required>
+<button type='submit' onclick="sendMessage()">Find me an Agent!</button>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+<script>
+	const socket = io('http://localhost:3000');
+	
+	socket.emit()
+	$(document).ready(function() {
+		$('#dtable').DataTable();
+	});
+	
+	socket.on('guest-view', data=>{	
+		var count = 0;
+
+		for(key in data){
+			if(data.hasOwnProperty(key)){
+				count++;
+			}
+		}
+		
+		console.log(data);
+		$("#dtable tr").remove(); 
+
+		for(var i = 1; i < Object.keys(data).length; i++){
+			
+		}
+	});
+
+	getLocation();
+
+	function getLocation() {
+	  if (navigator.geolocation) {
+	    navigator.geolocation.getCurrentPosition(function(position){
+	    	var data = {};
+	    	var url = window.location.search.substring(1);
+	    	var username = url.replace('username=', '');
+	    	console.log(username);
+	    	data.username = username;
+	    	data.latitude = position.coords.latitude;
+	    	data.longitude = position.coords.longitude;
+	    	console.log(data);
+	    	socket.emit('guest-location', data);
+	    });
+	  } else { 
+	    x.innerHTML = "Geolocation is not supported by this browser.";
+	  }
+	}
+
+	function sendMessage(elem){
+		var data = {};
+		data.name = $("#name").val();
+		console.log(data);
+		socket.emit('send-notifications', data);
+	}
+
+</script>

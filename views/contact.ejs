@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+<style>
+	#map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+</style>
+</head>
+<body>
+		<form style="display:none" method="GET" id="form-appointment" action="/clientVideo">
+			<input type="text" id="appointmentId" name='appointmentId'>
+			</form>
+			<div class="loading-div" style="text-align:center;display:none;">
+					<div class="loader">Loading...</div>
+					<p class="loader-text">Searching for an agent</p>
+				</div>
+	<div class="container-contact100">
+
+		<div id="contact-page" class="wrap-contact100">
+			<form class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Connect With an Agent Near You!</span>
+
+					<div id="map"></div> 	
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100">Your Name</span>
+					<input class="input100" type="text" name="name" placeholder="Enter your name" id= "name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<span class="label-input100">Email</span>
+					<input class="input100" type="text" name="email" placeholder="Enter your email addess" id= "email">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<span class="label-input100">Birthday</span>
+						<input class="input100" type="date" name="email" placeholder="Enter your email addess" id= "bday">
+						<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<span class="label-input100">Contact Number</span>
+						<input class="input100" type="text" name="email" placeholder="Enter your email addess" id= "phone">
+						<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 input100-select">
+					<span class="label-input100">How do you want to connect?</span>
+					<div>
+						<select class="selection-2" name="service" id="means">
+							<option>Chat</option>
+							<option>Voice Call</option>
+							<option>Video Call</option>
+						</select>
+					</div>
+					<span class="focus-input100"></span>
+				</div>
+<!-- 
+				<div class="wrap-input100 input100-select">
+					<span class="label-input100">Budget</span>
+					<div>
+						<select class="selection-2" name="budget">
+							<option>Select Budget</option>
+							<option>1500 $</option>
+							<option>2000 $</option>
+							<option>2500 $</option>
+						</select>
+					</div>
+					<span class="focus-input100"></span>
+				</div> -->
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button type="button" class="contact100-form-btn" onclick="sendMessage()">
+							<span>
+								Submit
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script>
+		var map;
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  
+  // The map, centered at Uluru
+  navigator.geolocation.getCurrentPosition(function(position){
+    	var data = {};
+    	var url = window.location.search.substring(1);
+    	var username = url.replace('username=', '');
+    	
+    	data.lat = position.coords.latitude;
+    	data.lng = position.coords.longitude;
+    	console.log("Here" + JSON.stringify(data));
+    	 map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 20, center: data});
+    	var marker = new google.maps.Marker({position: data, map:map});
+    });
+ 
+  	
+  
+  // The marker, positioned at Uluru
+  
+}
+    </script>
+<!--     <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNX_GkROdFkjDtLXZD6fw8PrkczJ8K6ZM&callback=initMap">
+    </script>
+ -->
+     <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNX_GkROdFkjDtLXZD6fw8PrkczJ8K6ZM&callback=initMap">
+    </script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+<script src="network.js"></script>
+<script>
+  const socket = io(`${ip}:8080`);
+	
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+
+
+  socket.on('guest-view', data=>{	
+  		var iconSet = [];
+
+  		iconSet[0] = 'http://maps.google.com/mapfiles/kml/paddle/grn-circle.png';
+  		iconSet[1] = 'http://maps.google.com/mapfiles/kml/paddle/purple-circle.png';
+		var count = 0;
+
+		for(key in data){
+			if(data.hasOwnProperty(key)){
+				count++;
+			}
+		}
+		
+		
+		$("#dtable tr").remove(); 
+
+		for(var i = 1; i < count; i++){
+		  	var uluru = {lat: data[i].lat, lng: data[i].long};
+		  	console.log("You here " + i + JSON.stringify(uluru));
+		  	var marker = new google.maps.Marker({position: uluru, icon:iconSet[i], map: map});
+  		}
+	});
+
+
+  getLocation();
+
+	function getLocation() {
+		var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+	  if (navigator.geolocation) {
+	    navigator.geolocation.getCurrentPosition(function(position,err,options){
+	    	var data = {};
+	    	var url = window.location.search.substring(1);
+	    	var username = url.replace('username=', '');
+	    	console.log(username);
+	    	data.username = username;
+	    	data.latitude = position.coords.latitude;
+	    	data.longitude = position.coords.longitude;
+	    	console.log(data);
+	    	socket.emit('guest-location', data);
+	    });
+	  } else { 
+	    x.innerHTML = "Geolocation is not supported by this browser.";
+	  }
+	}
+
+	function sendMessage(elem){
+		navigator.geolocation.getCurrentPosition(function(position){
+			var data = {};
+			var bday = $("#bday").val();
+			data.name = $("#name").val();
+			data.email = $("#email").val();
+			data.birth = bday;
+			data.phone = $("#phone").val();
+			data.latitude = position.coords.latitude;
+	    	data.longitude = position.coords.longitude;
+			data.means = $("#means option:selected").val();
+			console.log(data);
+			socket.emit('send-notifications', data);
+			$("#contact-page").css("filter","blur(3px)");
+			$(".loading-div").css("display","inline-block")
+	    });
+		
+	}
+
+	socket.on('call', data =>{
+		console.log("data is " +data);
+		$("#appointmentId").val(data);
+		$("#form-appointment").submit();
+	});
+
+
+</script>
+
+</body>
+</html>
