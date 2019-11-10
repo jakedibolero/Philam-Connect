@@ -188,7 +188,6 @@ iframe {
   color: #333333;
   line-height: 1.2;
   text-align: center;
-  padding-bottom: 44px;
 }
 
 
@@ -576,6 +575,13 @@ textarea.input100 {
   }
   .modal-title{
     font-size:50px;
+  }
+  .input100-agent{
+    font-size:30px;
+  }
+
+  .label-input100-agent{
+    font-size: 30px;
   }
 }
 

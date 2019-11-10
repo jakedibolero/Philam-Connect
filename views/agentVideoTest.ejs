@@ -55,7 +55,7 @@
       <div class="content">
         <button class="myBtn" onclick="findMeetingLocation()" data-toggle="modal" data-target="#modalLarge">Meeting Locations</button>
         <button class="myBtn" onclick="setSchedule()" data-toggle="modal" data-target="#modalLarge" >Schedule Meeting</button>
-        <button class="myBtn" onclick="disconnectCall()">Disconnect Call</button>
+        <a href="/clientList?username=<%=data.username%>"><button class="myBtn">Disconnect Call</button></a>
       </div>
         
         <div class="modal fade modal-fullscreen" id="modalLarge" tabindex="-1" role="dialog" aria-labelledby="modalLargeLabel">

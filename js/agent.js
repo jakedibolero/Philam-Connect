@@ -63,12 +63,12 @@ function findMeetingLocation(){
 
   $("#schedule-body").html(`
   <div class="wrap-input100 validate-input" data-validate="Name is required">
-                        <b><p><span class="label-input100">Starbucks Makati</span></p></b>
-                        <p><span class="label-input100">50m from client and 30m from agent</span></p>
+                        <b><p><span class="label-input100 .label-input100-agent">Starbucks Makati</span></p></b>
+                        <p><span class="label-input100 .label-input100-agent">50m from client and 30m from agent</span></p>
                       </div>
                       <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                          <b><p><span class="label-input100">Starbucks Edsa</span></p></b>
-                          <p><span class="label-input100">100m from client and 10m from agent</span></p>
+                          <b><p><span class="label-input100 .label-input100-agent">Starbucks Edsa</span></p></b>
+                          <p><span class="label-input100 .label-input100-agent">100m from client and 10m from agent</span></p>
   </div>
   `)
 }
@@ -78,36 +78,36 @@ function setSchedule(){
   $("#schedule-head").html("SET SCHEDULE")
   $("#schedule-body").html(`
   <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">Client Name</span>
-					<input class="input100" type="text" name="name" placeholder="Enter your Name" id= "name">
+					<span class="label-input100 .label-input100-agent">Client Name</span>
+					<input class="input100 input100-agent" type="text" name="name" placeholder="Enter your Name" id= "name">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<span class="label-input100">Client Email</span>
-					<input class="input100" type="text" name="email" placeholder="Enter your Email Address" id= "email">
+					<span class="label-input100 .label-input100-agent">Client Email</span>
+					<input class="input100 input100-agent" type="text" name="email" placeholder="Enter your Email Address" id= "email">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<span class="label-input100">Client Birthday</span>
-						<input class="input100" type="date" name="email" placeholder="Enter your email addess" id= "birth">
+						<span class="label-input100 .label-input100-agent">Client Birthday</span>
+						<input class="input100 input100-agent" type="date" name="email" placeholder="Enter your email addess" id= "birth">
 						<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<span class="label-input100">Client Contact Number</span>
-						<input class="input100" type="text" name="email" placeholder="Enter your Phone Number" id= "phone">
+						<span class="label-input100 .label-input100-agent">Client Contact Number</span>
+						<input class="input100 input100-agent" type="text" name="email" placeholder="Enter your Phone Number" id= "phone">
 						<span class="focus-input100"></span>
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<span class="label-input100">Meeting Schedule</span>
-						<input class="input100" type="date" name="email" placeholder="Enter your email addess" id= "schedule">
+						<span class="label-input100 .label-input100-agent">Meeting Schedule</span>
+						<input class="input100 input100-agent" type="date" name="email" placeholder="Enter your email addess" id= "schedule">
 						<span class="focus-input100"></span>
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<span class="label-input100">Meeting Time</span>
-						<input class="input100" type="text" name="email" placeholder="Enter Desired Time" id= "time">
+						<span class="label-input100 .label-input100-agent">Meeting Time</span>
+						<input class="input100 input100-agent" type="text" name="email" placeholder="Enter Desired Time" id= "time">
 						<span class="focus-input100"></span>
 				</div>
 <div class="container-contact100-form-btn">
@@ -140,7 +140,6 @@ data.birth = $('#birth').val()
 data.agent = localStorage.getItem('username')
 data.schedule = $('#schedule').val()
 data.time = $('#time').val()
-alert(JSON.stringify(data));
   $.ajax({
     url:`${ip}:8080/insert`,
     type:"POST",

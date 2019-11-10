@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="mobile-web-app-capable" content="yes">
   <input type="hidden" id="username" value='<%= data.username %>'>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -291,7 +292,7 @@
               *********************************************************************************************************************************************************** -->
           <div class="col-lg-3 ds" id="#demo2">
             <!-- RECENT ACTIVITIES SECTION -->
-            <h4 class="centered mt">AVAILABLE CLIENTS</h4>
+            <h4 class="centered mt" style="padding-bottom:40px">AVAILABLE CLIENTS</h4>
             <!-- First Activity -->
 
           </div>
@@ -383,10 +384,10 @@
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
   </script>
-
+<script src="network.js"></script>
   <script>
 var x = document.getElementById("demo");
-const socket = io('https://192.168.0.113:8080');
+const socket = io(`${ip}:8080`);
 getLocation();
 
 function accept(client, agent){
